@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="cordova-plugin-network" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <name>SFNetworkPlugin</name>
+
+  <engines>
+    <engine name="cordova" version=">=3.4.0"/>
+  </engines>
+
+  <js-module name="SFNetworkPlugin" src="www/SFNetworkPlugin.js">
+    <clobbers target="sfNetworkPlugin" />
+  </js-module>
+
+  <platform name="android">
+
+    <config-file parent="/*" target="res/xml/config.xml">
+      <feature name="SFNetworkPlugin">
+        <param name="android-package" value="cordova.plugin.network.SFNetworkPlugin" />
+      </feature>
+    </config-file>
+
+    <source-file src="src/android/SFNetworkPlugin.java" target-dir="src/cordova/plugin/network/SFNetworkPlugin" />
+    <framework src="src/android/sfnetwork.gradle" custom="true" type="gradleReference" />
+    <resource-file src="src/android/libs/sfnetworklib.aar" target="libs/sfnetworklib.aar" />
+
+  </platform>
+</plugin>

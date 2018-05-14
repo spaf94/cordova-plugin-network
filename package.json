@@ -1,0 +1,19 @@
+{
+  "name": "cordova-plugin-network",
+  "version": "0.0.1",
+  "description": "Network Info Cordova Plugin",
+  "cordova": {
+    "id": "cordova-plugin-network",
+    "platforms": []
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spaf94/cordova-plugin-network.git"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Simão Ferreira",
+  "license": "Apache License 2.0",
+  "homepage": "https://github.com/spaf94/cordova-plugin-network/blob/master/README.md"
+}
