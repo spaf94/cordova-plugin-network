@@ -1,4 +1,4 @@
-package cordova.plugin.digitalarhttp;
+package cordova.plugin.network;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -39,6 +39,7 @@ public class SFNetworkPlugin extends CordovaPlugin {
 
     private void haveNetworkConnection(CallbackContext callbackContext){
       try{
+        this.initializeSFNetwork();
         Context context = this.cordova.getActivity().getApplicationContext();
 
         if(this.sfNetwork.haveNetworkConnection(context)){
