@@ -9,11 +9,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import com.dev.spaf94.sfnetworklib.SFNetwork;
 
 /**
  * This class echoes a string called from JavaScript.
  */
 public class SFNetworkPlugin extends CordovaPlugin {
+
+    private SFNetwork sfNetwork = null;
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -28,11 +31,17 @@ public class SFNetworkPlugin extends CordovaPlugin {
         return result;
     }
 
+    private void initializeSFNetwork(){
+      if(this.sfNetwork == null){
+        this.sfNetwork = new SFNetwork();
+      }
+    }
+
     private void haveNetworkConnection(CallbackContext callbackContext){
       try{
         Context context = this.cordova.getActivity().getApplicationContext();
 
-        if(this.object.haveNetworkConnection(context)){
+        if(this.sfNetwork.haveNetworkConnection(context)){
           callbackContext.success("OK");
         }else{
           callbackContext.error("NO_NETWORK_CONNECTION");
