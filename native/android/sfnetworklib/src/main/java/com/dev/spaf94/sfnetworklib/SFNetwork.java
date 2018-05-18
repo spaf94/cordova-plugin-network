@@ -29,4 +29,8 @@ public class SFNetwork {
 
         return false;
     }
+
+    public void onConnectionStateChanged(boolean haveConnection){
+
+    }
 }
