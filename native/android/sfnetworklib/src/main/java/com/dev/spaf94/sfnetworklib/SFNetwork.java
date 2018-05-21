@@ -1,5 +1,6 @@
 package com.dev.spaf94.sfnetworklib;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -37,7 +38,7 @@ public class SFNetwork {
         return false;
     }
 
-    public void startNetworkMonitor(AppCompatActivity appCompatActivity){
+    public void startNetworkMonitor(Activity activity){
         this.intentFilter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
 
         this.broadcastReceiver = new BroadcastReceiver() {
@@ -50,12 +51,12 @@ public class SFNetwork {
             }
         };
 
-        appCompatActivity.registerReceiver(this.broadcastReceiver, this.intentFilter);
+        activity.registerReceiver(this.broadcastReceiver, this.intentFilter);
     }
 
-    public void stopNetworkMonitor(AppCompatActivity appCompatActivity){
+    public void stopNetworkMonitor(Activity activity){
         if(this.broadcastReceiver != null){
-            appCompatActivity.unregisterReceiver(this.broadcastReceiver);
+            activity.unregisterReceiver(this.broadcastReceiver);
         }
     }
 

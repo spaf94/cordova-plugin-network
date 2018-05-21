@@ -25,7 +25,7 @@ public class SFNetworkPlugin extends CordovaPlugin {
 
         if(action.equals("haveNetworkConnection")){
           this.haveNetworkConnection(callbackContext);
-        else if(action.equals("startNetworkMonitor")){
+        }else if(action.equals("startNetworkMonitor")){
           this.startNetworkMonitor(callbackContext);
         }else if(action.equals("stopNetworkMonitor")){
           this.stopNetworkMonitor(callbackContext);
@@ -42,8 +42,19 @@ public class SFNetworkPlugin extends CordovaPlugin {
             @Override
             public void onConnectionStateChanged(boolean haveConnection) {
                 super.onConnectionStateChanged(haveConnection);
+                onConnectionStateChangedPlugin(haveConnection);
             }
         };
+      }
+    }
+
+    private void onConnectionStateChangedPlugin(boolean haveConnection){
+      if(this.onConnectionStateChangedCallback != null){
+        if(haveConnection){
+          this.onConnectionStateChangedCallback.sendPluginResult(this.createResult(true, true, "HAVE_NETWORK_CONNECTION"));
+        }else{
+          this.onConnectionStateChangedCallback.sendPluginResult(this.createResult(false, true, "NO_NETWORK_CONNECTION"));
+        }
       }
     }
 
