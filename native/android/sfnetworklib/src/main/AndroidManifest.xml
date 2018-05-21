@@ -2,11 +2,4 @@
     package="com.example.digitalar.digitalarhttpandroidlib">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <application>
-        <receiver android:name="com.dev.spaf94.sfnetworklib.NetworkStateReceiver">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
-    </application>
 </manifest>
