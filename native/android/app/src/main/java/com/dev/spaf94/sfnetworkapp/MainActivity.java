@@ -14,7 +14,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.sfNetwork = new SFNetwork();
+        this.sfNetwork = new SFNetwork(){
+            @Override
+            public void onConnectionStateChanged(boolean haveConnection) {
+                super.onConnectionStateChanged(haveConnection);
+            }
+        };
         this.sfNetwork.startNetworkMonitor(this);
     }
 
