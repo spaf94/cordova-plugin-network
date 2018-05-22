@@ -1,6 +1,3 @@
-# cordova-plugin-network
-Cordova plugin network information
-
 # Cordova plugin network
 
 Cordova plugin to monitor the network in your cordova mobile app.
