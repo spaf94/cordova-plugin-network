@@ -2,9 +2,11 @@
 
 Cordova plugin to monitor the network in your cordova mobile app.
 
+## How to install
+` cordova plugin add https://github.com/spaf94/cordova-plugin-network `
 
 ## How to use
-### Check if have network connection 
+#### Check if have network connection 
 ```javascript
 function haveNetworkConnection(){
 
@@ -20,7 +22,7 @@ function haveNetworkConnection(){
 }
 ```
 
-### Start to monitor the network state 
+#### Start to monitor the network state 
 ```javascript
 function startNetworkMonitor(){
 
@@ -36,7 +38,7 @@ function startNetworkMonitor(){
 }
 ```
 
-### Stop to monitor the network state
+#### Stop to monitor the network state
 ```javascript
 function stopNetworkMonitor(){
 
