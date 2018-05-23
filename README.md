@@ -5,14 +5,48 @@ Cordova plugin to monitor the network in your cordova mobile app.
 
 ## How to use
 ### Check if have network connection 
-![haveNetworkConnection](https://github.com/spaf94/cordova-plugin-network/blob/master/native/github/img/haveNetworkConnection.png)
+```javascript
+function haveNetworkConnection(){
+
+  var callbackAlert = function(msg){
+    if(msg == 'OK'){
+      alert('Network connection available!');
+    }else{
+      alert('Network connection not available!');
+    }
+  };
+
+  sfNetworkPlugin.haveNetworkConnection(callbackAlert, callbackAlert);
+}
+```
 
 ### Start to monitor the network state 
-![startNetworkMonitor](https://github.com/spaf94/cordova-plugin-network/blob/master/native/github/img/startNetworkMonitor.png)
+```javascript
+function startNetworkMonitor(){
+
+  var callbackAlert = function(msg){
+    if(msg == 'HAVE_NETWORK_CONNECTION'){
+      alert('Network connection available!');
+    }else if(msg == 'NO_NETWORK_CONNECTION'){
+      alert('Network connection not available!');
+    }
+  };
+
+  sfNetworkPlugin.startNetworkMonitor(callbackAlert, callbackAlert);
+}
+```
 
 ### Stop to monitor the network state
-![stopNetworkMonitor](https://github.com/spaf94/cordova-plugin-network/blob/master/native/github/img/stopNetworkMonitor.png)
+```javascript
+function stopNetworkMonitor(){
 
+  var callbackAlert = function(msg){
+    console.log(msg);
+  };
+
+  sfNetworkPlugin.stopNetworkMonitor(callbackAlert, callbackAlert);
+}
+```
 
 ## Issues
 If you find any bugs, please submit an [issue](https://github.com/spaf94/cordova-plugin-network/issues/new/).
