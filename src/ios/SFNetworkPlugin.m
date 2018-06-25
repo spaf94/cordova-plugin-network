@@ -1,8 +1,14 @@
 #import "SFNetworkPlugin.h"
+#import "Reachability.h"
+
 #include <unistd.h>
 #include <netdb.h>
 
 @implementation SFNetworkPlugin
+
+CDVPluginResult* monitorPluginResult = nil;
+CDVInvokedUrlCommand* monitorCommand = nil;
+Reachability* reachability = nil;
 
 - (void)haveNetworkConnection:(CDVInvokedUrlCommand*)command
 {
@@ -29,20 +35,41 @@
 
 - (void)startNetworkMonitor:(CDVInvokedUrlCommand*)command
 {
-    CDVPluginResult* pluginResult = nil;
+    monitorPluginResult = nil;
 
-	pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+    reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
+    [reachability startNotifier];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
+
+    monitorCommand = command;
+
+    monitorPluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"OK"];
+    [monitorPluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
+
+    [self.commandDelegate sendPluginResult:monitorPluginResult callbackId:command.callbackId];
+}
+
+- (void)reachabilityDidChange:(NSNotification *)notification {
+    Reachability *reachability = (Reachability *)[notification object];
+    monitorPluginResult = nil;
     
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"OK"];
+    if ([reachability isReachable]) {
+        monitorPluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"HAVE_NETWORK_CONNECTION"];
+    } else {
+        monitorPluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"NO_NETWORK_CONNECTION"];
+    }
 
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    [self.commandDelegate sendPluginResult:monitorPluginResult callbackId:monitorCommand.callbackId];
 }
 
 - (void)stopNetworkMonitor:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
 
-	pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+	if (reachability) {
+        [reachability stopNotifier];
+    }
     
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"OK"];
 

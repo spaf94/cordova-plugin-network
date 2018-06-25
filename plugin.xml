@@ -24,6 +24,8 @@
 			</feature>
 		</config-file>
 		<header-file src="src/ios/SFNetworkPlugin.h" target-dir="SFNetworkPlugin"/>
+		<header-file src="src/ios/Reachability.h" target-dir="SFNetworkPlugin"/>
 		<source-file src="src/ios/SFNetworkPlugin.m" target-dir="SFNetworkPlugin"/>
+		<source-file src="src/ios/Reachability.m" target-dir="SFNetworkPlugin"/>
 	</platform>
 </plugin>
